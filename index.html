@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Work, Energy, and Power — from zero</title>
+<title>Work, Energy, and Power</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -117,8 +117,8 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:30px 0}
 
 <div class="hero">
   <div>
-    <h1>Work, Energy, and Power — from zero</h1>
-    <p>No physics background needed. Every part has a small “lab”: drag a slider or an arrow and watch the numbers change. At the end you’ll find all 16 quiz questions, each with an explanation.</p>
+    <h1>Work, Energy, and Power, from zero</h1>
+    <p>No physics background needed. Every part has a small “lab”: drag a slider or an arrow, press Play, and watch the numbers change. At the end you’ll find all 16 quiz questions, each with a hint, a picture, and an explanation.</p>
     <p>Try dragging the tip of the blue arrow in the box. That is the whole idea of “work.”</p>
     <div class="formula-strip">
       <span class="chip">W = F·d·cos θ</span><span class="chip">K = ½mv²</span><span class="chip">W<sub>net</sub> = ΔK</span><span class="chip">P = W/t = F·v</span>
@@ -181,7 +181,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:30px 0}
       </table>
       <div class="note trap"><p><b>Trap in Q1 and Q2:</b> “It moves at constant speed, so the work is zero” is <b>wrong</b>. Each force still does work. The student’s positive work and friction’s negative work just <b>add up to zero</b>.</p></div>
     </div>
-    <div class="lab">
+    <div class="lab" id="lab-work">
       <h4>Work lab</h4>
       <p class="hint">Drag the <b>tip of the blue arrow</b> to change the force’s direction and size. The box always moves to the right (yellow arrow).</p>
       <svg id="wSvg" viewBox="0 0 420 250" role="img" aria-label="Drag the force arrow tip to change the angle"></svg>
@@ -193,6 +193,30 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:30px 0}
         <button class="btn" data-wp="37,20">Q7: pulling at 37°</button>
       </div>
       <div class="readout" id="wOut"></div>
+    </div>
+  </div>
+  <div class="cols">
+    <div class="prose">
+      <h3>Q1 in motion: two forces, two works</h3>
+      <p>Press Play and watch the box slide at a steady 2 m/s. The student’s work keeps <b>growing</b> (energy goes in). Friction’s work keeps <b>dropping below zero</b> (energy goes out). The two cancel, so the box never speeds up.</p>
+      <p>Then press “Push harder.” Now the student puts in more than friction takes out, and the extra becomes kinetic energy: the box speeds up.</p>
+      <div class="note key"><p><b>Ask three questions in every work problem.</b></p><p>1. Which force am I looking at?<br>2. Which way does the object move?<br>3. What is the angle between them?</p><p>Then use W = F·d·cos θ.</p></div>
+    </div>
+    <div class="lab" id="lab-q1">
+      <h4>Watch it: pushing at constant speed</h4>
+      <p class="hint">Friction is 20 N. Choose the push, then press Play.</p>
+      <svg id="kSvg" viewBox="0 0 420 130" role="img" aria-label="A box pushed along a floor with friction"></svg>
+      <div class="btns" role="group" aria-label="Push size">
+        <button class="btn on" data-kp="20">Push 20 N (Q1)</button><button class="btn" data-kp="30">Push harder, 30 N</button>
+        <button class="btn" id="kRun">Play</button>
+      </div>
+      <div class="bars" aria-hidden="true">
+        <div class="bar"><i id="kIn" style="background:var(--force)"></i></div>
+        <div class="bar"><i id="kOut" style="background:var(--neg)"></i></div>
+        <div class="bar"><i id="kKe" style="background:var(--ke)"></i></div>
+      </div>
+      <div class="barlab"><span>Student’s work (+)</span><span>Friction’s work (−)</span><span>Kinetic energy K</span></div>
+      <div class="readout" id="kOutTxt"></div>
     </div>
   </div>
 </section>
@@ -211,13 +235,18 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:30px 0}
       <p>Add up the work of <b>all</b> the forces, and you get how much the kinetic energy changes. Positive net work: the object speeds up. Negative: it slows down. Zero: same speed.</p>
       <div class="note"><p><b>Q3 (crane):</b> tension is 400 N up, gravity is 300 N down, so the net force is 100 N up. W<sub>net</sub> = 100 × 2 = <b>+200 J into the box</b>.</p>
       <p><b>Q15:</b> W = 8 × 4 = 32 J = ½(1)v², so v = 8 m/s.</p></div>
-      <h3>Q12: energy bookkeeping</h3>
+      <div class="lab" id="lab-crane">
+        <h4>Q3 picture: count the squares</h4>
+        <p class="hint">Each square is 100 N. Up arrow 4 squares, down arrow 3 squares. The green arrow is what is left over: the net force.</p>
+        <svg id="craneSvg" viewBox="0 0 420 210" role="img" aria-label="Free body diagram of the crane box on a 100 newton grid"></svg>
+      </div>
+      <h3 id="lab-q12">Q12: energy bookkeeping</h3>
       <p>The push puts energy in. That energy is split three ways: lifting the box higher (against gravity), heat from friction, and what is left becomes kinetic energy.</p>
       <p><b>|W<sub>applied</sub>| = |W<sub>gravity</sub>| + |W<sub>friction</sub>| + 50 J</b></p>
       <svg viewBox="0 0 420 70" role="img" aria-label="Energy bar for question 12">
         <rect x="0" y="8" width="341" height="26" fill="var(--pe)" rx="4"/><text x="8" y="26" fill="#fff" font-size="12" font-weight="700">Gravity 300 J</text>
         <rect x="341" y="8" width="23" height="26" fill="var(--th)"/><rect x="364" y="8" width="56" height="26" fill="var(--ke)" rx="4"/>
-        <text x="338" y="52" font-size="11" fill="var(--muted)">heat 20</text><text x="374" y="52" font-size="11" fill="var(--muted)">KE 50</text>
+        <text x="360" y="52" font-size="11" fill="var(--muted)" text-anchor="end">heat 20</text><text x="392" y="52" font-size="11" fill="var(--muted)" text-anchor="middle">KE 50</text>
         <text x="0" y="66" font-size="11" fill="var(--muted)">Whole bar = work by the push = 370 J (h = 5·sin 37° = 3 m, mgh = 300 J)</text>
       </svg>
     </div>
@@ -258,7 +287,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:30px 0}
       <p><b>Q5:</b> the surfaces warm up because friction (non-conservative) turns mechanical energy into thermal energy → <b>C</b>.</p>
       <p><b>Q6:</b> same height, so gravity does the same work. But friction takes some of block B’s energy, so A ends with more kinetic energy → <b>D</b>.</p></div>
     </div>
-    <div class="lab">
+    <div class="lab" id="lab-paths">
       <h4>Try it: three paths down the same height</h4>
       <p class="hint">Pick a path, set the roughness, then press “Release.” Notice that gravity’s work is always the same.</p>
       <svg id="cSvg" viewBox="0 0 420 220" role="img" aria-label="Three paths from the same height"></svg>
@@ -285,10 +314,17 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:30px 0}
       <p>Height drop: h = L − L·cos θ = 1 − 0.8 = 0.2 m. Potential energy turns into kinetic energy: mgh = 2 × 10 × 0.2 = <b>4 J</b> → answer <b>C</b>.</p>
       <div class="note trap"><p><b>Trap:</b> using h = 1 m (the whole string) gives 20 J (answer D). Only count how far it <b>drops</b>.</p></div>
     </div>
-    <div class="lab">
-      <h4>Try it: change the release angle</h4>
+    <div class="lab" id="lab-pend">
+      <h4>Try it: let the pendulum swing</h4>
+      <p class="hint">Set the release angle and press Swing. Watch the blue string arrow and the yellow motion arrow: they always make a right angle.</p>
       <svg id="pSvg" viewBox="0 0 420 230" role="img" aria-label="Pendulum"></svg>
       <div class="ctrl"><label for="pa">Release angle</label><input id="pa" type="range" min="5" max="80" step="1" value="37"><output id="pao"></output></div>
+      <div class="btns"><button class="btn" id="pRun">Swing</button></div>
+      <div class="bars" aria-hidden="true" style="height:110px">
+        <div class="bar"><i id="pPE" style="background:var(--pe)"></i></div>
+        <div class="bar"><i id="pKE" style="background:var(--ke)"></i></div>
+      </div>
+      <div class="barlab"><span>Potential energy U</span><span>Kinetic energy K</span></div>
       <div class="readout" id="pOut"></div>
     </div>
   </div>
@@ -311,7 +347,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:30px 0}
       <p><b>Q14:</b> area is 500 J, but the rope is at 37°, so multiply by 0.8: <b>400 J</b>.</p>
       <p><b>Q15:</b> area is 32 J, used to find the speed (see part 6).</p></div>
     </div>
-    <div class="lab">
+    <div class="lab" id="lab-graph">
       <h4>Try it: drag the x slider to “paint” the area</h4>
       <div class="btns" role="group" aria-label="Choose a graph">
         <button class="btn on" data-g="0">Q8</button><button class="btn" data-g="1">Q9</button>
@@ -337,12 +373,28 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:30px 0}
       <p><b>Q11:</b> A: 100 N × 10 m / 5 s = 200 W. B: 50 N × 20 m / 5 s = 200 W. <b>Equal</b>.</p>
       <p><b>Q15:</b> v = 8 m/s (from part 5), so P = 8 N × 8 m/s = <b>64 W</b>.</p></div>
     </div>
-    <div class="lab">
+    <div class="lab" id="lab-power">
       <h4>Try it: P = F · v and its sign</h4>
       <div class="ctrl"><label for="pF">Force F</label><input id="pF" type="range" min="0" max="200" step="10" value="60"><output id="pFo"></output></div>
       <div class="ctrl"><label for="pv">Velocity v</label><input id="pv" type="range" min="0" max="20" step="1" value="5"><output id="pvo"></output></div>
       <div class="btns" role="group" aria-label="Force direction"><button class="btn on" data-pd="1">Force along the motion</button><button class="btn" data-pd="-1">Force against the motion</button></div>
       <div class="readout" id="powOut"></div>
+    </div>
+  </div>
+  <h3>Q11: a heavy crate and a light crate</h3>
+  <div class="cols">
+    <div class="prose">
+      <p>Machine A drags a <b>heavy</b> 50 kg crate. Machine B drags a <b>light</b> 25 kg crate. Which one is more powerful? Press Race and watch the work counters.</p>
+      <p><b>Step 1: the force.</b> At constant speed the machine pulls exactly as hard as friction. Friction = μ·m·g, so A pulls 0.2 × 50 × 10 = 100 N and B pulls 0.2 × 25 × 10 = 50 N.</p>
+      <p><b>Step 2: the work.</b> A: 100 N × 10 m = 1000 J. B: 50 N × 20 m = 1000 J.</p>
+      <p><b>Step 3: the power.</b> Both take 5 s, so both are 1000 ÷ 5 = <b>200 W</b>.</p>
+      <div class="note key"><p>Half the force over twice the distance gives the same work. Same work in the same time means the same power.</p></div>
+    </div>
+    <div class="lab" id="lab-race">
+      <h4>Watch it: the 5-second race</h4>
+      <svg id="rSvg" viewBox="0 0 420 190" role="img" aria-label="Two machines dragging crates for 5 seconds"></svg>
+      <div class="btns"><button class="btn" id="rRun">Race</button></div>
+      <div class="readout" id="rOut"></div>
     </div>
   </div>
   <h3>Q16: the elevator, the hardest question</h3>
@@ -354,7 +406,7 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:30px 0}
       <p><b>Step 3: P = T · v</b>, negative if T (always up) is opposite to the motion.</p>
       <div class="note trap"><p><b>Trap (answer A):</b> using T = mg = 10 000 N gives −50 000 W, and using m(g − a) = 8 000 N gives −40 000 W. Moving down while <b>slowing down</b> means the acceleration is <b>up</b>, so T = 12 000 N and P = <b>−60 000 W</b> → answer <b>B</b>.</p></div>
     </div>
-    <div class="lab">
+    <div class="lab" id="lab-elev">
       <h4>Try it: choose how the elevator moves</h4>
       <svg id="elSvg" viewBox="0 0 420 200" role="img" aria-label="Elevator with tension and gravity"></svg>
       <div class="btns" role="group" aria-label="Direction"><button class="btn" data-ed="1">Moving up</button><button class="btn on" data-ed="-1">Moving down</button></div>
@@ -371,9 +423,11 @@ footer{color:var(--muted);font-size:14px;text-align:center;padding:30px 0}
   <div class="quiz" id="quizBox">
     <div class="qtop"><div class="dots" id="qDots"></div><div class="score" id="qScore"></div></div>
     <div class="qtext" id="qText"></div>
+    <svg id="qFig" viewBox="0 0 420 210" role="img" aria-label="Figure for this question" style="max-width:420px;width:100%;display:none"></svg>
     <div id="qOpts"></div>
+    <div class="note" id="qHint" style="display:none"></div>
     <div class="explain note key" id="qExp"></div>
-    <div class="btns"><button class="btn" id="qPrev">Previous</button><button class="btn" id="qNext">Next</button><button class="btn" id="qReset">Start over</button></div>
+    <div class="btns"><button class="btn" id="qHintBtn">Show a hint</button><button class="btn" id="qPrev">Previous</button><button class="btn" id="qNext">Next</button><button class="btn" id="qReset">Start over</button></div>
   </div>
 </section>
 
@@ -387,7 +441,7 @@ const $=id=>document.getElementById(id);
 const cssv=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
 function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;}
 function clear(s){while(s.firstChild)s.removeChild(s.firstChild);}
-function defs(svg){const d=el('defs',{},svg);['force','disp','pos','neg','pe','ke','muted'].forEach(c=>{const m=el('marker',{id:svg.id+'-'+c,viewBox:'0 0 10 10',refX:'8',refY:'5',markerWidth:'7',markerHeight:'7',orient:'auto-start-reverse'},d);el('path',{d:'M0,0 L10,5 L0,10 z',fill:'var(--'+c+')'},m);});}
+function defs(svg){const d=el('defs',{},svg);['force','disp','pos','neg','pe','ke','muted'].forEach(c=>{const m=el('marker',{id:svg.id+'-'+c,viewBox:'0 0 10 10',refX:'8',refY:'5',markerWidth:'4',markerHeight:'4',orient:'auto-start-reverse'},d);el('path',{d:'M0,0 L10,5 L0,10 z',fill:'var(--'+c+')'},m);});}
 function arrow(svg,x1,y1,x2,y2,c,w){if(Math.hypot(x2-x1,y2-y1)<3)return null;return el('line',{x1,y1,x2,y2,stroke:'var(--'+c+')','stroke-width':w||4,'marker-end':'url(#'+svg.id+'-'+c+')','stroke-linecap':'round'},svg);}
 function txt(svg,x,y,s,o){o=o||{};return el('text',{x,y,'font-size':o.size||13,'font-weight':o.w||600,fill:o.fill||'var(--ink)','text-anchor':o.anchor||'start'},svg,s);}
 const fmt=(n,d)=>{d=d==null?1:d;let r=Math.round(n*Math.pow(10,d))/Math.pow(10,d);if(Object.is(r,-0))r=0;return r.toLocaleString('en-US',{maximumFractionDigits:d}).replace(/,/g,'\u2009').replace('-','\u2212');};
@@ -492,24 +546,37 @@ bindRange('cmu','%',()=>{cProg=0;drawC();})();
 $('cRun').addEventListener('click',()=>{if(reduce){cProg=1;drawC();return;}cancelAnimationFrame(cAnim);const t0=performance.now();const step=t=>{let s=Math.min(1,(t-t0)/2000);cProg=s*s;drawC();if(s<1)cAnim=requestAnimationFrame(step);};cAnim=requestAnimationFrame(step);});
 
 /* ---------- pendulum ---------- */
+let pPhi=null,pDir=-1,pAnim=null;
 function drawP(){
   const svg=$('pSvg');clear(svg);defs(svg);const a=+$('pa').value,r=a*Math.PI/180,L=170,px=210,py=20;
+  const phi=pPhi==null?a:pPhi,q=phi*Math.PI/180;
   el('line',{x1:150,y1:py,x2:270,y2:py,stroke:'var(--ink)','stroke-width':3},svg);
   el('line',{x1:px,y1:py,x2:px,y2:py+L,stroke:'var(--line)','stroke-dasharray':'4 4'},svg);
-  el('path',{d:`M${px-L*Math.sin(r)},${py+L*Math.cos(r)} A${L},${L} 0 0 0 ${px},${py+L}`,fill:'none',stroke:'var(--disp)','stroke-width':2,'stroke-dasharray':'6 4'},svg);
-  const bx=px-L*Math.sin(r),by=py+L*Math.cos(r);
+  el('path',{d:`M${px-L*Math.sin(r)},${py+L*Math.cos(r)} A${L},${L} 0 0 0 ${px+L*Math.sin(r)},${py+L*Math.cos(r)}`,fill:'none',stroke:'var(--disp)','stroke-width':2,'stroke-dasharray':'6 4',opacity:.6},svg);
+  const bx=px-L*Math.sin(q),by=py+L*Math.cos(q);
+  const E=2*10*(1-cosD(a)),U=pPhi==null?E:Math.min(E,2*10*(1-Math.cos(q))),K=Math.max(0,E-U),spd=Math.sqrt(K);
   el('line',{x1:px,y1:py,x2:bx,y2:by,stroke:'var(--ink)','stroke-width':2},svg);
   arrow(svg,bx,by,bx+(px-bx)*0.32,by+(py-by)*0.32,'force',4);
-  arrow(svg,bx,by,bx+40*Math.cos(r),by+40*Math.sin(r),'disp',3);
+  const len=pPhi==null?40:20*spd,sg=pPhi==null?1:-pDir;
+  if(len>4)arrow(svg,bx,by,bx+sg*len*Math.cos(q),by+sg*len*Math.sin(q),'disp',3);
   el('circle',{cx:bx,cy:by,r:11,fill:'var(--ke)',stroke:'var(--ink)','stroke-width':1.5},svg);
-  el('line',{x1:bx,y1:by,x2:px+60,y2:by,stroke:'var(--pe)','stroke-dasharray':'3 3'},svg);
-  el('line',{x1:px+60,y1:by,x2:px+60,y2:py+L,stroke:'var(--pe)','stroke-width':3},svg);
-  txt(svg,px+66,(by+py+L)/2+4,'h',{fill:'var(--pe)'});
-  txt(svg,bx-14,by-16,'tension',{fill:'var(--force)',size:11,anchor:'end'});
-  const h=1-cosD(a),E=2*10*h;
-  $('pOut').innerHTML=`The blue arrow (string tension) is always <b>perpendicular</b> to the yellow arrow (direction of motion) → work by tension = <b>0</b>.<br>h = L − L·cos ${a}° = 1 − ${fmt(cosD(a),3)} = <b>${fmt(h,3)} m</b> → mgh = 2 × 10 × ${fmt(h,3)} = <span class="big">${fmt(E,2)} J</span> of PE turns into KE.`;
+  if(py+L-by>2){
+    el('line',{x1:bx,y1:by,x2:px+60,y2:by,stroke:'var(--pe)','stroke-dasharray':'3 3'},svg);
+    el('line',{x1:px+60,y1:by,x2:px+60,y2:py+L,stroke:'var(--pe)','stroke-width':3},svg);
+    txt(svg,px+66,(by+py+L)/2+4,'h',{fill:'var(--pe)'});
+  }
+  txt(svg,bx+(bx<px?-14:14),by-16,'tension',{fill:'var(--force)',size:11,anchor:bx<px?'end':'start'});
+  $('pPE').style.height=(E?U/E*100:0)+'%';$('pKE').style.height=(E?K/E*100:0)+'%';
+  const h=1-cosD(a);
+  let s=`The blue arrow (string tension) is always <b>perpendicular</b> to the yellow arrow (direction of motion) → work by tension = <b>0</b>.<br>h = L − L·cos ${a}° = 1 − ${fmt(cosD(a),3)} = <b>${fmt(h,3)} m</b> → mgh = 2 × 10 × ${fmt(h,3)} = <span class="big">${fmt(E,2)} J</span> of PE turns into KE.`;
+  if(pPhi!=null)s+=`<br>Right now: U = <b>${fmt(U,2)} J</b>, K = <b>${fmt(K,2)} J</b>. They always add up to ${fmt(E,2)} J. At the bottom, all of it is kinetic.`;
+  $('pOut').innerHTML=s;
 }
-bindRange('pa','°',drawP)();
+bindRange('pa','°',()=>{cancelAnimationFrame(pAnim);pPhi=null;drawP();})();
+$('pRun').addEventListener('click',()=>{cancelAnimationFrame(pAnim);if(reduce){pPhi=0;pDir=-1;drawP();return;}
+  const a=+$('pa').value,T=2400,t0=performance.now();
+  const step=t=>{const e=t-t0;if(e>=2*T){pPhi=null;drawP();return;}const w=2*Math.PI*e/T;pPhi=a*Math.cos(w);pDir=Math.sin(w)>0?-1:1;drawP();pAnim=requestAnimationFrame(step);};
+  pAnim=requestAnimationFrame(step);});
 
 /* ---------- F-x graphs ---------- */
 const graphs=[
@@ -573,6 +640,81 @@ document.querySelectorAll('[data-ed]').forEach((b,_,all)=>b.addEventListener('cl
 document.querySelectorAll('[data-es]').forEach((b,_,all)=>b.addEventListener('click',()=>{es=+b.dataset.es;setOn([...all],b);drawEl();}));
 drawEl();
 
+/* ---------- constant speed push (Q1) ---------- */
+let kP=20,kProg=0,kAnim=null;const kM=5,kF=20,kV0=2,kD=8;
+function drawK(){
+  const svg=$('kSvg');clear(svg);defs(svg);const s=kD*kProg,a=(kP-kF)/kM,v=Math.sqrt(kV0*kV0+2*a*s);
+  const Win=kP*s,Wf=kF*s,K0=0.5*kM*kV0*kV0,K=0.5*kM*v*v;
+  const x0=110,x1=380,xp=x0+(x1-x0)*s/kD;
+  el('line',{x1:0,y1:100,x2:420,y2:100,stroke:'var(--muted)','stroke-width':2},svg);
+  for(let i=0;i<=8;i++){const x=x0+(x1-x0)*i/8;el('line',{x1:x,y1:100,x2:x,y2:105,stroke:'var(--muted)'},svg);}
+  el('rect',{x:xp-24,y:62,width:48,height:36,rx:5,fill:'var(--soft)',stroke:'var(--ink)','stroke-width':2},svg);
+  txt(svg,xp,85,'5 kg',{anchor:'middle',size:11});
+  arrow(svg,xp-26-kP*3,72,xp-26,72,'force',3);txt(svg,xp-26-kP*1.5,64,'push '+kP+' N',{anchor:'middle',fill:'var(--force)',size:11});
+  arrow(svg,xp-24,92,xp-24-kF*3,92,'neg',3);txt(svg,xp-24-kF*1.5,118,'friction 20 N',{anchor:'middle',fill:'var(--neg)',size:11});
+  arrow(svg,xp-20,46,xp-20+v*14,46,'disp',3);txt(svg,xp-20,34,'v = '+fmt(v,1)+' m/s',{fill:'var(--disp)',size:11});
+  const max=240;$('kIn').style.height=(Win/max*100)+'%';$('kOut').style.height=(Wf/max*100)+'%';$('kKe').style.height=(K/max*100)+'%';
+  const msg=kP===kF?'Constant speed: the two works <b>cancel</b>, but <b>neither one is zero</b>. That is answer B.':'The push beats friction by 10 N, so the extra '+fmt(Win-Wf,0)+' J becomes kinetic energy and the box <b>speeds up</b>.';
+  if(kProg===0){$('kOutTxt').innerHTML=`The box already moves at 2 m/s (K = ${fmt(K0,0)} J). Press Play to push it 8 m.`;return;}
+  $('kOutTxt').innerHTML=`Distance so far: <b>${fmt(s,1)} m</b>. Student’s work = +${kP} × ${fmt(s,1)} = <b class="pos">+${fmt(Win,0)} J</b> · Friction’s work = −20 × ${fmt(s,1)} = <b class="neg">−${fmt(Wf,0)} J</b><br>Net work = <b>${fmt(Win-Wf,0)} J</b> → K goes from ${fmt(K0,0)} J to ${fmt(K,0)} J.<br>${msg}`;
+}
+document.querySelectorAll('[data-kp]').forEach((b,_,all)=>b.addEventListener('click',()=>{cancelAnimationFrame(kAnim);kP=+b.dataset.kp;setOn([...all],b);kProg=0;drawK();}));
+$('kRun').addEventListener('click',()=>{cancelAnimationFrame(kAnim);if(reduce){kProg=1;drawK();return;}
+  const a=(kP-kF)/kM,t0=performance.now();
+  const step=t=>{const e=(t-t0)/1000,s=Math.min(kD,kV0*e+0.5*a*e*e);kProg=s/kD;drawK();if(s<kD)kAnim=requestAnimationFrame(step);};
+  kAnim=requestAnimationFrame(step);});
+drawK();
+
+/* ---------- crane free body diagram (Q3) ---------- */
+function figCrane(svg){
+  clear(svg);defs(svg);const cx=140,cy=105,u=20;
+  for(let i=0;i<=10;i++){el('line',{x1:cx-100+i*u,y1:5,x2:cx-100+i*u,y2:205,stroke:'var(--grid)'},svg);el('line',{x1:cx-100,y1:5+i*u,x2:cx+100,y2:5+i*u,stroke:'var(--grid)'},svg);}
+  el('rect',{x:cx-18,y:cy-14,width:36,height:28,rx:4,fill:'var(--soft)',stroke:'var(--ink)','stroke-width':2},svg);
+  arrow(svg,cx,cy,cx,cy-4*u,'force',5);txt(svg,cx+8,cy-4*u+12,'tension 400 N',{fill:'var(--force)',size:11});
+  arrow(svg,cx,cy,cx,cy+3*u,'neg',5);txt(svg,cx+8,cy+3*u-2,'gravity 300 N',{fill:'var(--neg)',size:11});
+  arrow(svg,cx+60,cy,cx+60,cy-u,'pos',5);txt(svg,cx+66,cy-6,'net 100 N',{fill:'var(--pos)',size:11});
+  arrow(svg,cx-70,cy+20,cx-70,cy-40,'disp',3);txt(svg,cx-96,cy+36,'d = 2 m',{fill:'var(--disp)',size:11});
+  txt(svg,cx+142,150,'W net = 100 N × 2 m',{size:12});txt(svg,cx+142,172,'= +200 J',{size:15,w:800,fill:'var(--pos)'});txt(svg,cx+142,190,'into the box',{size:12,fill:'var(--muted)'});
+}
+figCrane($('craneSvg'));
+
+/* ---------- machine race (Q11) ---------- */
+let rProg=0,rAnim=null;
+function drawR(){
+  const svg=$('rSvg');clear(svg);defs(svg);const x0=60,x1=385,sc=(x1-x0)/20;
+  txt(svg,412,16,'t = '+fmt(5*rProg,1)+' s',{anchor:'end',size:12,fill:'var(--muted)'});
+  const lanes=[{n:'A',m:50,F:100,d:10,y:80,w:44,h:36},{n:'B',m:25,F:50,d:20,y:170,w:38,h:24}];
+  const W=[];
+  lanes.forEach(L=>{
+    el('line',{x1:0,y1:L.y,x2:420,y2:L.y,stroke:'var(--muted)','stroke-width':2},svg);
+    el('line',{x1:x0+L.d*sc,y1:L.y-50,x2:x0+L.d*sc,y2:L.y,stroke:'var(--disp)','stroke-dasharray':'4 3'},svg);
+    const s=L.d*rProg,x=x0+s*sc;W.push(L.F*s);
+    el('rect',{x:x-L.w,y:L.y-L.h,width:L.w,height:L.h,rx:4,fill:'var(--soft)',stroke:'var(--ink)','stroke-width':2},svg);
+    txt(svg,x-L.w/2,L.y-L.h/2+4,L.m+' kg',{anchor:'middle',size:10});
+    arrow(svg,x,L.y-L.h/2,x+L.F*0.3,L.y-L.h/2,'force',4);
+    txt(svg,6,L.y-54,`Machine ${L.n}: ${L.m} kg crate, pulls ${L.F} N, goes ${L.d} m`,{size:12});
+  });
+  const done=rProg>=1;
+  if(rProg===0){$('rOut').innerHTML='Both machines start together and stop at 5 s. Press Race and watch the two work counters.';return;}
+  $('rOut').innerHTML=`Work so far · A: 100 × ${fmt(10*rProg,1)} = <b>${fmt(W[0],0)} J</b> · B: 50 × ${fmt(20*rProg,1)} = <b>${fmt(W[1],0)} J</b><br>`+(done?'Both did 1000 J in 5 s → P = 1000 ÷ 5 = <span class="big">200 W</span> each. P<sub>A</sub> = P<sub>B</sub>, answer C.':'The two work counters climb at the <b>same rate</b> the whole time. That is what equal power looks like.');
+}
+$('rRun').addEventListener('click',()=>{cancelAnimationFrame(rAnim);if(reduce){rProg=1;drawR();return;}const t0=performance.now();
+  const step=t=>{rProg=Math.min(1,(t-t0)/4000);drawR();if(rProg<1)rAnim=requestAnimationFrame(step);};rAnim=requestAnimationFrame(step);});
+drawR();
+
+/* ---------- static F-x figure for the quiz ---------- */
+function figGraph(svg,g){
+  clear(svg);defs(svg);const L=46,R=400,T=18,B=190;const X=x=>L+(R-L)*x/g.xmax;const yr=g.ymax-Math.min(0,g.ymin);const Y=y=>T+(B-T)*(g.ymax-y)/yr;
+  for(let i=0;i<=g.xmax;i++){el('line',{x1:X(i),y1:T,x2:X(i),y2:B,stroke:'var(--grid)'},svg);txt(svg,X(i),Y(Math.min(0,g.ymin))+16,String(i),{anchor:'middle',size:11,fill:'var(--muted)'});}
+  const ticks=g.ymin<0?[-10,0,10,20]:[0,g.ymax/2,g.ymax];
+  ticks.forEach(t=>{el('line',{x1:L,y1:Y(t),x2:R,y2:Y(t),stroke:'var(--grid)'},svg);txt(svg,L-6,Y(t)+4,String(t),{anchor:'end',size:11,fill:'var(--muted)'});});
+  let line='';for(let i=0;i<=400;i++){const x=g.xmax*i/400;line+=(i?' L':'M')+X(x)+','+Y(g.f(Math.min(x,g.xmax-1e-9)));}
+  el('path',{d:line+` L${X(g.xmax)},${Y(0)} L${X(0)},${Y(0)} Z`,fill:'var(--force)',opacity:.12},svg);
+  el('path',{d:line,fill:'none',stroke:'var(--force)','stroke-width':3},svg);
+  el('line',{x1:L,y1:Y(0),x2:R,y2:Y(0),stroke:'var(--ink)','stroke-width':1.5},svg);el('line',{x1:L,y1:T,x2:L,y2:B,stroke:'var(--ink)','stroke-width':1.5},svg);
+  txt(svg,L+4,T+2,g.name==='Q14'?'tension (N)':'net force (N)',{size:11,fill:'var(--muted)'});txt(svg,R,Y(0)-6,'x (m)',{size:11,fill:'var(--muted)',anchor:'end'});
+}
+
 /* ---------- quiz ---------- */
 const Q=[
 {q:'1. A student pushes a 5-kg box horizontally across a rough floor at a constant speed of 2 m/s to the right. Which correctly describes the work done on the box?',o:['Applied: positive; Friction: positive','Applied: positive; Friction: negative','Applied: negative; Friction: positive','Both zero because constant speed','Both zero because perpendicular to displacement'],a:1,e:'The student pushes in the direction of motion (θ = 0°, cos = 1) → <b>positive</b> work. Friction points opposite to the motion (θ = 180°, cos = −1) → <b>negative</b> work. Constant speed only means the two works add up to zero, not that each one is zero.',s:'work'},
@@ -592,6 +734,28 @@ const Q=[
 {q:'15. A 1.0-kg cart from rest; net force 8 N constant over 4 m (graph). Instantaneous power at x = 4 m?',o:['16 W','32 W','64 W','128 W','256 W'],a:2,e:'W = 8 × 4 = 32 J = ½(1)v² → v = 8 m/s. P = F·v = 8 × 8 = <b>64 W</b>. Trap: 32 W (giving work instead of power).',s:'power'},
 {q:'16. A 1000-kg elevator moves downward but slows at 2.0 m/s². At 5.0 m/s, power by tension, and energy in or out?',o:['−40,000 W; out','−60,000 W; out','+40,000 W; in','+60,000 W; in','+10,000 W; in'],a:1,e:'Moving down but slowing down → acceleration points <b>up</b>. T − mg = ma → T = 1000(10 + 2) = 12 000 N. T is up, v is down → P = −12 000 × 5 = <b>−60 000 W</b>; energy goes <b>out</b>. Trap A: using m(g − a).',s:'power'}
 ];
+const HINTS=[
+ 'Look at each force by itself. Does it point the same way the box moves, or the opposite way?',
+ 'The hand pushes up. The tray moves sideways. What is the angle between up and sideways?',
+ 'Count the squares: 1 square = 100 N. Find the net force first, then multiply by the distance.',
+ 'Does the work by gravity depend on the path? As the rock falls, is potential energy stored or released?',
+ '“Warmer” tells you which kind of energy appeared. Which force makes things warm?',
+ 'Same height means gravity does the same work. Which block loses some energy to friction?',
+ 'Only the part of the 20 N that points along the floor does work. Use cos 37° = 0.8.',
+ 'Work = area under the graph. Area of a triangle = ½ × base × height.',
+ 'Area above the axis counts as plus. Area below the axis counts as minus.',
+ 'Constant speed means the pedaling force equals the 60 N resistance. Then use P = F · v.',
+ 'For each machine, find friction (μ·m·g), then work (F × d), then power (W ÷ t).',
+ 'The push pays for three things. Name them: lifting the box, heat from friction, and…?',
+ 'Is the string ever pulling along the motion? How far does the bob actually drop: 1 m, or less?',
+ 'Find the area first. Then keep only the horizontal part of the force (× 0.8).',
+ 'Area gives the work. Work gives the kinetic energy. Kinetic energy gives v. Then P = F · v.',
+ 'Moving down and slowing down: which way does the acceleration point? Then use F<sub>net</sub> = m·a to find T.'
+];
+const LABS=[['lab-q1',['[data-kp="20"]']],['lab-work',['[data-wp="90,20"]']],['lab-crane'],['lab-paths',['[data-path="0"]']],['lab-paths',['[data-path="1"]']],['lab-paths',['[data-path="2"]']],['lab-work',['[data-wp="37,20"]']],['lab-graph',['[data-g="0"]']],['lab-graph',['[data-g="1"]']],['lab-power'],['lab-race'],['lab-q12'],['lab-pend'],['lab-graph',['[data-g="2"]']],['lab-graph',['[data-g="3"]']],['lab-elev',['[data-ed="-1"]','[data-es="-1"]']]];
+const FIGS={2:s=>figCrane(s),7:s=>figGraph(s,graphs[0]),8:s=>figGraph(s,graphs[1]),13:s=>figGraph(s,graphs[2]),14:s=>figGraph(s,graphs[3])};
+let hintOn=false,lastCur=-1;
+function goLab(i){const [id,sel]=LABS[i];(sel||[]).forEach(q=>{const b=document.querySelector(q);if(b)b.click();});$(id).scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'});}
 const KEY='wep-quiz-v1';let st={cur:0,ans:{}};
 try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s&&typeof s.cur==='number')st=s;}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}};
@@ -605,8 +769,13 @@ function renderQ(){
   q.o.forEach((t,i)=>{const b=document.createElement('button');b.className='opt';b.textContent=String.fromCharCode(65+i)+'. '+t;
     if(picked!=null){if(i===q.a)b.classList.add('right');else if(i===picked)b.classList.add('wrong');}
     b.onclick=()=>{if(st.ans[st.cur]!=null)return;st.ans[st.cur]=i;save();renderQ();};box.appendChild(b);});
-  const ex=$('qExp');if(picked!=null){ex.classList.add('show');ex.innerHTML=`<p><b>${picked===q.a?'Correct.':'Not quite. The answer is '+String.fromCharCode(65+q.a)+'.'}</b></p><p>${q.e}</p><p><a href="#${q.s}">Review ${secName[q.s]}</a></p>`;}else{ex.classList.remove('show');ex.innerHTML='';}
+  if(st.cur!==lastCur){hintOn=false;lastCur=st.cur;}
+  const fig=$('qFig');if(FIGS[st.cur]){fig.style.display='block';FIGS[st.cur](fig);}else{fig.style.display='none';clear(fig);}
+  const hb=$('qHint');hb.style.display=hintOn&&picked==null?'block':'none';hb.innerHTML='<p><b>Hint.</b> '+HINTS[st.cur]+'</p>';
+  $('qHintBtn').style.display=picked==null?'':'none';$('qHintBtn').textContent=hintOn?'Hide the hint':'Show a hint';
+  const ex=$('qExp');if(picked!=null){ex.classList.add('show');ex.innerHTML=`<p><b>${picked===q.a?'Correct.':'Not quite. The answer is '+String.fromCharCode(65+q.a)+'.'}</b></p><p>${q.e}</p><div class="btns"><button class="btn" id="qLab">Try it in the lab</button><a class="btn" href="#${q.s}" style="text-decoration:none">Review ${secName[q.s]}</a></div>`;$('qLab').onclick=()=>goLab(st.cur);}else{ex.classList.remove('show');ex.innerHTML='';}
 }
+$('qHintBtn').onclick=()=>{hintOn=!hintOn;renderQ();};
 $('qPrev').onclick=()=>{st.cur=(st.cur+Q.length-1)%Q.length;save();renderQ();};
 $('qNext').onclick=()=>{st.cur=(st.cur+1)%Q.length;save();renderQ();};
 $('qReset').onclick=()=>{st={cur:0,ans:{}};save();renderQ();};
